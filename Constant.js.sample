@@ -1,0 +1,4 @@
+var BACKLOG_API_KEY = 'XXX';
+var BACKLOG_DOMAIN = 'xxx.backlog.jp';
+
+var SLACK_INCOMING_HOOK_URL = 'https://url';
