@@ -92,6 +92,7 @@ function arrangeMessage(content) {
         message += issueLinkedTitle(content["project"]["projectKey"], content["content"]) + "\n";
         message += content["content"]["comment"]["content"] + "\n";
         break;
+      case 5: // Wiki Created
       case 6: // Wiki Updated
         message += wikiLinkedTitle(content["project"]["projectKey"], content["content"]) + "\n";
         message += "Diff: " + content["content"]["diff"] + "\n";
@@ -120,7 +121,7 @@ function arrangeMessage(content) {
       case 20: // Comment on Pull Request
         message += '#' + content["content"]["number"] + ' ' + content["content"]["summary"] + "\n";
         message += content["content"]["repository"]["name"] + " : " + content["content"]["branch"] + " → " + content["content"]["base"] + "\n";
-        message += content["content"]["comment"] + "\n";
+        message += content["content"]["comment"]["content"] + "\n";
         break;
       default:
         message += JSON.stringify(content) + "\n";
