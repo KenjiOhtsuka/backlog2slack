@@ -11,3 +11,13 @@ function issueLinkedTitle(projectKey, issueJson) {
   title += issueJson["summary"] + ">";
   return title;
 }
+
+function slackLinkedUserName(userJson) {
+  if (Users[userJson["id"]] != null) return '<@' + Users[userJson["id"]] + '>';
+  return userJson["name"];
+}
+
+function slackUserName(userJson) {
+  if (Users[userJson["id"]] != null) return Users[userJson["id"]];
+  return userJson["name"];
+}
