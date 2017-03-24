@@ -29,7 +29,7 @@ Backlog Event List
 	Pull Request-Related Event
 		Pull Request Created
 		19 Pull Request Updated
-		Comment on Pull Request
+		20 Comment on Pull Request
 */
 var EventTypes = {
   1: "Issue Created",
@@ -40,7 +40,9 @@ var EventTypes = {
   6: "Wiki Updated",
   12: "Git Pushed",
   13: "Git Repository Created",
-  19: "Pull Request Updated"
+  18: "Pull Request Created",
+  19: "Pull Request Updated",
+  20: "Comment on Pull Request"
 };
 
 function doPost(e) {
@@ -95,8 +97,27 @@ function arrangeMessage(content) {
         message += content["content"]["ref"] + "\n";
         for (var i = 0; i < content["content"]["revisions"].length; ++i) {
           message += '<' + gitCommitUrl(content["project"]["projectKey"], content["content"]["repository"]["name"], content["content"]["revisions"][i]["rev"]) + '|' + content["content"]["revisions"][i]["rev"] + ">\n";
-          message += content["content"]["revisions"][i]["comment"]["content"] + "\n";
+          message += content["content"]["revisions"][i]["comment"] + "\n";
         }
+        break;
+      case 18: // Pull Request Created
+        message += '#' + content["content"]["number"] + ' ' + content["content"]["summary"] + "\n";
+        message += content["content"]["repository"]["name"] + " : " + content["content"]["branch"] + " → " + content["content"]["base"] + "\n";
+        message += content["content"]["description"] + "\n";
+        message += "Related Issue: " + issueTitleLinked(content["project"]["projectKey"], content["content"]["issue"]) + "\n";
+        message += "Assignee: " + content["content"]["assignee"]["name"] + "\n";
+        break;
+      case 19: // Pull Request Updated
+        message += '#' + content["content"]["number"] + ' ' + content["content"]["summary"] + "\n";
+        message += content["content"]["repository"]["name"] + " : " + content["content"]["branch"] + " → " + content["content"]["base"] + "\n";
+        for (var i = 0; i < changes.length; ++i) {
+          message += changes[i]["field"] + " : " + changes[i]["old_value"] + " → " + changes[i]["new_value"] + "\n";
+        }
+        break;
+      case 20: // Comment on Pull Request
+        message += '#' + content["content"]["number"] + ' ' + content["content"]["summary"] + "\n";
+        message += content["content"]["repository"]["name"] + " : " + content["content"]["branch"] + " → " + content["content"]["base"] + "\n";
+        message += content["content"]["comment"] + "\n";
         break;
       default:
         message += JSON.stringify(content) + "\n";
@@ -110,9 +131,10 @@ function arrangeMessage(content) {
 }
 
 function buildNotificationMessage(notifications) {
-  message = 'Notify To: ';
+  var message = '';
   for (var i = 0; i < notifications.length; ++i) {
-    if (i != 0) message += ', '; 
+    if (i == 0) message += 'Notify To: ';
+    else message += ', ';
     message += notifications[i]["user"]["name"];
   }
   return message;
