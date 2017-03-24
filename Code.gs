@@ -77,12 +77,10 @@ function arrangeMessage(content) {
     switch (content["type"]) {
       case 1: // Issue Created
         message += issueLinkedTitle(content["project"]["projectKey"], content["content"]) + "\n";
-        message += content["content"]["summary"] + ">\n";
         message += content["content"]["description"] + "\n";
         break;
       case 2: // Issue Updated
         message += issueLinkedTitle(content["project"]["projectKey"], content["content"]) + "\n";
-        message += content["content"]["summary"] + ">\n";
         var changes = content["content"]["changes"];
         for (var i = 0; i < changes.length; ++i) {
           message += changes[i]["field"] + "(" + changes[i]["type"] + ") : " + changes[i]["old_value"] + " → " + changes[i]["new_value"] + "\n";
