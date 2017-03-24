@@ -27,7 +27,7 @@ Backlog Event List
 		Version/Milestone Updated
 		Version/Milestone Deleted
 	Pull Request-Related Event
-		Pull Request Created
+		18 Pull Request Created
 		19 Pull Request Updated
 		20 Comment on Pull Request
 */
@@ -61,7 +61,7 @@ function testPost() {
 
 function composePayload(contentJson) {
   var payload = {
-    "username": contentJson["createdUser"]["name"],
+    "username": slackUserName(contentJson["createdUser"]),
     "text": arrangeMessage(contentJson),
     "channel" : "#backlog"
   };
@@ -104,7 +104,7 @@ function arrangeMessage(content) {
         message += '#' + content["content"]["number"] + ' ' + content["content"]["summary"] + "\n";
         message += content["content"]["repository"]["name"] + " : " + content["content"]["branch"] + " → " + content["content"]["base"] + "\n";
         message += content["content"]["description"] + "\n";
-        message += "Related Issue: " + issueTitleLinked(content["project"]["projectKey"], content["content"]["issue"]) + "\n";
+        message += "Related Issue: " + issueLinkedTitle(content["project"]["projectKey"], content["content"]["issue"]) + "\n";
         message += "Assignee: " + content["content"]["assignee"]["name"] + "\n";
         break;
       case 19: // Pull Request Updated
@@ -135,7 +135,7 @@ function buildNotificationMessage(notifications) {
   for (var i = 0; i < notifications.length; ++i) {
     if (i == 0) message += 'Notify To: ';
     else message += ', ';
-    message += notifications[i]["user"]["name"];
+    message += slackLinkedUserName(notifications[i]["user"]);
   }
   return message;
 }
