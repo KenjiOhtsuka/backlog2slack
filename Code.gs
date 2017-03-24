@@ -76,12 +76,12 @@ function arrangeMessage(content) {
     if (eventName != null) message += eventName + "\n";
     switch (content["type"]) {
       case 1: // Issue Created
-        message += issueLinkedTitle(content["project"]["projectKey"], content["content"]);
+        message += issueLinkedTitle(content["project"]["projectKey"], content["content"]) + "\n";
         message += content["content"]["summary"] + ">\n";
         message += content["content"]["description"] + "\n";
         break;
       case 2: // Issue Updated
-        message += issueLinkedTitle(content["project"]["projectKey"], content["content"]);
+        message += issueLinkedTitle(content["project"]["projectKey"], content["content"]) + "\n";
         message += content["content"]["summary"] + ">\n";
         var changes = content["content"]["changes"];
         for (var i = 0; i < changes.length; ++i) {
@@ -89,7 +89,7 @@ function arrangeMessage(content) {
         }
         break;
       case 3: // Issue Commented
-        message += issueLinkedTitle(content["project"]["projectKey"], content["content"]);
+        message += issueLinkedTitle(content["project"]["projectKey"], content["content"]) + "\n";
         message += content["content"]["comment"]["content"] + "\n";
         break;
       case 6: // Wiki Updated
