@@ -75,23 +75,26 @@ function arrangeMessage(content) {
     var eventName = EventTypes[content["type"]];
     if (eventName != null) message += eventName + "\n";
     switch (content["type"]) {
-      case 1:
-        message += '<' + issueUrl(content["project"]["projectKey"], content["content"]["key_id"]) + '|' + content["project"]["projectKey"] + "-" + content["content"]["key_id"] + " ";
+      case 1: // Issue Created
+        message += issueLinkedTitle(content["project"]["projectKey"], content["content"]);
         message += content["content"]["summary"] + ">\n";
         message += content["content"]["description"] + "\n";
         break;
-      case 2:
-        message += '<' + issueUrl(content["project"]["projectKey"], content["content"]["key_id"]) + '|' + content["project"]["projectKey"] + "-" + content["content"]["key_id"] + " ";
+      case 2: // Issue Updated
+        message += issueLinkedTitle(content["project"]["projectKey"], content["content"]);
         message += content["content"]["summary"] + ">\n";
         var changes = content["content"]["changes"];
         for (var i = 0; i < changes.length; ++i) {
           message += changes[i]["field"] + "(" + changes[i]["type"] + ") : " + changes[i]["old_value"] + " → " + changes[i]["new_value"] + "\n";
         }
         break;
-      case 3:
-        message += '<' + issueUrl(content["project"]["projectKey"], content["content"]["key_id"]) + '|' + content["project"]["projectKey"] + "-" + content["content"]["key_id"] + " ";
-        message += content["content"]["summary"] + ">\n";
+      case 3: // Issue Commented
+        message += issueLinkedTitle(content["project"]["projectKey"], content["content"]);
         message += content["content"]["comment"]["content"] + "\n";
+        break;
+      case 6: // Wiki Updated
+        message += wikiLinkedTitle(content["project"]["projectKey"], content["content"]) + "\n";
+        message += "Diff: " + content["content"]["diff"] + "\n";
         break;
       case 12:
         message += content["content"]["ref"] + "\n";
