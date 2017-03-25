@@ -5,41 +5,55 @@ Backlog Event List
 		1 Issue Created
 		2 Issue Updated
 		3 Issue Commented
-		Issue Deleted
-		Multiple Issues Updated
 		17 Add Noification
 	Wiki-Related Event
 		Wiki Created
 		6 Wiki Updated
-		Wiki Deleted
+		
 	File-Related Event
-		File Added
-		File Updated
-		File Deleted
 	Version Control-Related Event
-		Subversion Committed
+		
 		12 Git Pushed
 		13 Git Repository Created
 	Project-Related Event
-		Project Member Added
-		Project Member Removed
-		Version/Milestone Created
-		Version/Milestone Updated
-		Version/Milestone Deleted
 	Pull Request-Related Event
 		18 Pull Request Created
 		19 Pull Request Updated
 		20 Comment on Pull Request
 */
 var EventTypes = {
+  /* Issue-Related Event */
   1: "Issue Created",
   2: "Issue Updated",
   3: "Issue Commented",
+  /*
+    Issue Deleted
+    Multiple Issues Updated
+  */
   17: "Add Notification",
+  /* Wiki-Related Event */
   5: "Wiki Created",
   6: "Wiki Updated",
+  /* : "Wiki Deleted" */
+  /* File Related Event */
+  /*
+		File Added
+		File Updated
+		File Deleted
+  */
+  /* Version Control-Related Event */
+  /* : "Subversion Committed" */
   12: "Git Pushed",
   13: "Git Repository Created",
+  /* Project-Related Event */
+  /*
+		: "Project Member Added"
+		: "Project Member Removed"
+		: "Version/Milestone Created"
+		: "Version/Milestone Updated"
+		: "Version/Milestone Deleted"
+  */
+  /* Pull Request-Related Event */
   18: "Pull Request Created",
   19: "Pull Request Updated",
   20: "Comment on Pull Request"
@@ -55,7 +69,7 @@ function postBacklogToSlack(contentJson) {
 }
 
 function testPost() {
-  var c = '{"created":"2017-03-23T10:17:17Z","project":{"archived":false,"projectKey":"F","name":"t","chartEnabled":true,"id":1,"subtaskingEnabled":true,"textFormattingRule":"markdown"},"id":1,"type":1,"content":{"summary":"This is test","key_id":1,"customFields":[],"dueDate":"","description":"This is test. \\n","priority":{"name":"中","id":3},"resolution":{"name":"","id":null},"actualHours":null,"issueType":{"color":"#666665","name":"質問","displayOrder":0,"id":1,"projectId":1},"milestone":[],"versions":[],"parentIssueId":null,"estimatedHours":null,"id":1,"assignee":{"name":"K","id":74019,"roleType":94,"lang":"null","userId":"K"},"category":[],"startDate":"","status":{"name":"未対応","id":1}},"notifications":[{"reason":1,"resourceAlreadyRead":false,"alreadyRead":false,"id":7378241,"user":{"nulabAccount":null,"name":"K","mailAddress":null,"id":74019,"roleType":2,"userId":null}}],"createdUser":{"nulabAccount":null,"name":"TEST","mailAddress":null,"id":48748,"roleType":2,"lang":"ja","userId":null}}';
+  var c = '{"created":"2017-03-23T10:17:17Z","project":{"archived":false,"projectKey":"F","name":"t","chartEnabled":true,"id":1,"subtaskingEnabled":true,"textFormattingRule":"markdown"},"id":1,"type":1,"content":{"summary":"This is test","key_id":1,"customFields":[],"dueDate":"","description":"This is test. \\n","priority":{"name":"中","id":3},"resolution":{"name":"","id":null},"actualHours":null,"issueType":{"color":"#666665","name":"質問","displayOrder":0,"id":1,"projectId":1},"milestone":[],"versions":[],"parentIssueId":null,"estimatedHours":null,"id":1,"assignee":{"name":"K","id":74019,"roleType":94,"lang":"null","userId":"K"},"category":[],"startDate":"","status":{"name":"未対応","id":1}},"notifications":[{"reason":1,"resourceAlreadyRead":false,"alreadyRead":false,"id":7378241,"user":{"nulabAccount":null,"name":"K","mailAddress":null,"id":1,"roleType":2,"userId":null}}],"createdUser":{"nulabAccount":null,"name":"TEST","mailAddress":null,"id":1,"roleType":2,"lang":"ja","userId":null}}';
   postBacklogToSlack(JSON.parse(c));
 }
 
