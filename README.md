@@ -1,8 +1,9 @@
 # backlog2slack
 
-This is an google apps script project to connect Backlog and Slack.  
+This is an google apps script project to connect Backlog and Slack. This script can be used with Incoming Webhook of Slack.
 
-Backlog から Slack に連携する Google Apps Script を作りました。
+Backlog から Slack に連携する Google Apps Script を作りました。 Slack の Incoming Webhook で利用できます。
+
 
 ## Deploy (デプロイ)
 
