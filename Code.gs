@@ -63,7 +63,7 @@ function composePayload(contentJson) {
   var payload = {
     "username": slackUserName(contentJson["createdUser"]),
     "text": arrangeMessage(contentJson),
-    "channel" : "#backlog"
+    "channel" : SLACK_CHANNEL
   };
   return JSON.stringify(payload);
 }
@@ -186,7 +186,6 @@ function myFunction() {
     "channel" : "#backlog"
   };
   post(slackUrl, JSON.stringify(payload));
-    
 }
 
 
