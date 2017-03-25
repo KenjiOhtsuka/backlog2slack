@@ -1,26 +1,3 @@
-/*
-Backlog Event List
-
-	Issue-Related Event
-		1 Issue Created
-		2 Issue Updated
-		3 Issue Commented
-		17 Add Noification
-	Wiki-Related Event
-		Wiki Created
-		6 Wiki Updated
-		
-	File-Related Event
-	Version Control-Related Event
-		
-		12 Git Pushed
-		13 Git Repository Created
-	Project-Related Event
-	Pull Request-Related Event
-		18 Pull Request Created
-		19 Pull Request Updated
-		20 Comment on Pull Request
-*/
 var EventTypes = {
   /* Issue-Related Event */
   1: "Issue Created",
