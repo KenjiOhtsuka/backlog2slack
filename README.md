@@ -17,8 +17,8 @@ Backlog から Slack に連携する Google Apps Script を作りました。 Sl
 
 ### Japanese Introduction
 
-1. 全ての gs コード を Google Drive に配置します。
-    * `Constant.gs.sample` は `Constant.gs` にしてください。  
-    * `BacklogUser.gs.sample` は `BacklogUser.gs` にしてください。
+1. 全ての gs コード を Google Drive に配置します。  
+    * `Constant.gs.sample` は `Constant.gs` にしてください。  
+    * `BacklogUser.gs.sample` は `BacklogUser.gs` にしてください。
 1. Google Drive 上 で公開します。
 1. Backlog の Webhook を設定します。
