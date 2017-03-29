@@ -63,7 +63,7 @@ function arrangeMessage(content) {
   try {
     // if you arrange the message to post to slack,
     // change this method.
-    var eventName = EventTypes[content["type"]];
+    var eventName = "*" + EventTypes[content["type"]] + "*";
     if (eventName != null) message += eventName + "\n";
     switch (content["type"]) {
       case 1: // Issue Created
