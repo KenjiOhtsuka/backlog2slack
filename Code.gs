@@ -97,12 +97,17 @@ function arrangeMessage(content) {
         message += gitPrLinkedTitle(content["project"]["projectKey"], content["content"]) + "\n";
         message += content["content"]["repository"]["name"] + " : " + content["content"]["branch"] + " → " + content["content"]["base"] + "\n";
         message += content["content"]["description"] + "\n";
-        message += "Related Issue: " + issueLinkedTitle(content["project"]["projectKey"], content["content"]["issue"]) + "\n";
+        if (content["content"]["issue"] != null) {
+          message += "Related Issue: " + issueLinkedTitle(content["project"]["projectKey"], content["content"]["issue"]) + "\n";
+        }
         message += "Assignee: " + content["content"]["assignee"]["name"] + "\n";
         break;
       case 19: // Pull Request Updated
         message += gitPrLinkedTitle(content["project"]["projectKey"], content["content"]) + "\n";
         message += content["content"]["repository"]["name"] + " : " + content["content"]["branch"] + " → " + content["content"]["base"] + "\n";
+        if (content["content"]["issue"] != null) {
+          message += "Related Issue: " + issueLinkedTitle(content["project"]["projectKey"], content["content"]["issue"]) + "\n";
+        }
         for (var i = 0; i < changes.length; ++i) {
           message += changes[i]["field"] + " : " + changes[i]["old_value"] + " → " + changes[i]["new_value"] + "\n";
         }
