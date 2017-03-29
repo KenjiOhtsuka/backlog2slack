@@ -94,14 +94,14 @@ function arrangeMessage(content) {
         }
         break;
       case 18: // Pull Request Created
-        message += '#' + content["content"]["number"] + ' ' + content["content"]["summary"] + "\n";
+        message += gitPrLinkedTitle(content["project"]["projectKey"], content["content"]) + "\n";
         message += content["content"]["repository"]["name"] + " : " + content["content"]["branch"] + " → " + content["content"]["base"] + "\n";
         message += content["content"]["description"] + "\n";
         message += "Related Issue: " + issueLinkedTitle(content["project"]["projectKey"], content["content"]["issue"]) + "\n";
         message += "Assignee: " + content["content"]["assignee"]["name"] + "\n";
         break;
       case 19: // Pull Request Updated
-        message += '#' + content["content"]["number"] + ' ' + content["content"]["summary"] + "\n";
+        message += gitPrLinkedTitle(content["project"]["projectKey"], content["content"]) + "\n";
         message += content["content"]["repository"]["name"] + " : " + content["content"]["branch"] + " → " + content["content"]["base"] + "\n";
         for (var i = 0; i < changes.length; ++i) {
           message += changes[i]["field"] + " : " + changes[i]["old_value"] + " → " + changes[i]["new_value"] + "\n";
@@ -174,7 +174,7 @@ function myFunction() {
   var slackUrl = SLACK_INCOMING_HOOK_URL;
   var payload = {
     "text": response.getContentText(),
-    "channel" : "#backlog"
+    "channel" : SLACK_CHANNEL
   };
   post(slackUrl, JSON.stringify(payload));
 }
