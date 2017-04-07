@@ -113,7 +113,7 @@ function arrangeMessage(content) {
         }
         break;
       case 20: // Comment on Pull Request
-        message += '#' + content["content"]["number"] + ' ' + content["content"]["summary"] + "\n";
+        message += gitPrLinkedTitle(content["project"]["projectKey"], content["content"]) + "\n";
         message += content["content"]["repository"]["name"] + " : " + content["content"]["branch"] + " → " + content["content"]["base"] + "\n";
         message += content["content"]["comment"]["content"] + "\n";
         break;
