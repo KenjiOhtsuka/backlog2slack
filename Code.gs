@@ -108,6 +108,7 @@ function arrangeMessage(content) {
         if (content["content"]["issue"] != null) {
           message += "Related Issue: " + issueLinkedTitle(content["project"]["projectKey"], content["content"]["issue"]) + "\n";
         }
+        var changes = content["content"]["changes"];
         for (var i = 0; i < changes.length; ++i) {
           message += changes[i]["field"] + " : " + changes[i]["old_value"] + " → " + changes[i]["new_value"] + "\n";
         }
